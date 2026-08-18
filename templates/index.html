@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veritasium — Science and engineering videos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body id="top">
+
+  <div class="ticker">An element of truth — science and engineering videos</div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#top">
+        <span class="brand-mark"></span>
+        Veritasium
+      </a>
+
+      <nav class="primary-nav" aria-label="Navegación principal">
+        <ul>
+          {% for item in nav_links %}
+            <li class="{{ 'has-children' if item.children }}">
+              <a href="#">{{ item.label }}</a>
+              {% if item.children %}
+                <ul class="dropdown">
+                  {% for child in item.children %}
+                    <li><a href="#">{{ child }}</a></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-label="Abrir menú">Menú</button>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Science &amp; Engineering Channel</div>
+        <h1>An <em>element</em><br>of truth</h1>
+        <p class="lede">
+          Videos about experiments, expert interviews, cool demos and
+          conversations with the public about everything science.
+        </p>
+        <div class="hero-ctas">
+          <button class="btn btn-solid" type="button">Watch featured</button>
+          <button class="btn" type="button">Browse videos</button>
+        </div>
+      </div>
+
+      <div class="scope">
+        <div class="scope-head">
+          <span>SIGNAL / CH‑01</span>
+          <div class="scope-dots"><span></span><span></span><span></span></div>
+        </div>
+        <svg viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg">
+          <path class="scope-path"
+                d="M0,140 C30,40 60,20 90,90 C120,160 150,60 180,30
+                   C210,10 240,120 270,150 C300,170 330,40 360,60
+                   C380,72 400,110 420,90" />
+          <path class="scope-path alt"
+                d="M0,90 C40,110 80,150 120,120 C160,90 200,20 240,40
+                   C280,60 320,150 360,130 C390,116 405,95 420,100" />
+        </svg>
+        <div class="scope-caption">
+          <span>freq: curiosity</span>
+          <span>amp: 1.0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURED ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Latest uploads</div>
+          <h2>Featured</h2>
+        </div>
+        <a class="view-all" href="#">View all videos →</a>
+      </div>
+
+      <div class="video-grid">
+        {% for video in featured_videos %}
+        <article class="card">
+          <div class="card-panel {{ video.accent }}">
+            <span class="tag">{{ video.tag }}</span>
+            <span class="idx">{{ '%02d' % loop.index }}</span>
+            <span class="play-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 4L20 12L6 20V4Z" fill="#F4F0E4"/>
+              </svg>
+            </span>
+          </div>
+          <div class="card-body">
+            <span class="date">{{ video.date }}</span>
+            <h3>{{ video.title }}</h3>
+            <p>{{ video.excerpt }}</p>
+            <a class="read-more" href="#">Read more →</a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATS STRIP ================= -->
+  <section class="stats">
+    <div class="wrap">
+      <div class="stat"><b>18M+</b><span>Subscribers</span></div>
+      <div class="stat"><b>350+</b><span>Videos published</span></div>
+      <div class="stat"><b>15</b><span>Years on air</span></div>
+      <div class="stat"><b>2</b><span>Awards shelves, full</span></div>
+    </div>
+  </section>
+
+  <!-- ================= NEWSLETTER ================= -->
+  <section class="newsletter">
+    <div class="wrap">
+      <div>
+        <h2>VeMail</h2>
+        <p>A newsletter about the ideas behind the videos — no spam, just signal.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input type="email" placeholder="you@example.com" disabled>
+        <button type="button" disabled>Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= SOCIAL ================= -->
+  <section class="social">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Behind the scenes</div>
+          <h2>On social</h2>
+        </div>
+      </div>
+      <div class="social-grid">
+        <div class="social-panel">@veritasium — set walkthrough</div>
+        <div class="social-panel">@veritasium — field shoot</div>
+        <div class="social-panel">@veritasium — studio notes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="wrap footer-top">
+      <div class="social-links">
+        {% for social in social_links %}
+          <a href="#">{{ social }}</a>
+        {% endfor %}
+      </div>
+      <a class="back-to-top" href="#top">Back to top ↑</a>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>veritasium@gmail.com</span>
+      <span>© {{ year }} Electrify US LLC. "Veritasium" and "Ve" are trademarks of Electrify US LLC</span>
+    </div>
+  </footer>
+
+</body>
+</html>
